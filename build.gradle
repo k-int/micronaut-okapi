@@ -1,5 +1,4 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
 }
 
 apply plugin:"java"
@@ -16,12 +15,6 @@ repositories {
     mavenCentral()
     maven { url "https://jcenter.bintray.com" }
     maven { url "http://maven.k-int.com/content/repositories/releases" }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom 'io.micronaut:micronaut-bom:1.0.0'
-    }
 }
 
 dependencies {
@@ -44,50 +37,5 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-all:1.3"
 }
 
-shadowJar {
-    mergeServiceFiles()
-}
-
-run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
-
-mainClassName = "service.Application"
 compileJava.options.compilerArgs += '-parameters'
 compileTestJava.options.compilerArgs += '-parameters'
-
-publishing {
-  publications {
-    plugin(MavenPublication) {
-      groupId "${group}"
-      pom.withXml {
-        def pomNode = asNode()
-        pomNode.dependencyManagement.replaceNode {}
-
-        // simply remove dependencies without a version
-        // version-less dependencies are handled with dependencyManagement
-        // see https://github.com/spring-gradle-plugins/dependency-management-plugin/issues/8 for more complete solutions
-        pomNode.dependencies.dependency.findAll {
-          it.version.text().isEmpty()
-        }.each {
-          it.replaceNode {}
-        }
-      }
-      from components.java
-    }
-  }
-
-  if (un) {
-    System.out.println("Found username for K-Int Maven repo '${un}'")
-    repositories {
-      maven {
-        name "KIntPublic"
-        // url "http://maven.k-int.com/content/repositories/private"
-        url "http://nexus.k-int.com/content/repositories/releases/"
-        credentials {
-          username un
-          password pw
-        }
-      }
-    }
-  }
-}
-
