@@ -14,6 +14,11 @@ import org.slf4j.LoggerFactory;
 public class OkapiTenantController {
 
   private static final Logger LOG = LoggerFactory.getLogger(OkapiTenantController.class); 
+  protected final OkapiTenantService tenantService;
+
+  public OkapiTenantController(OkapiTenantService tenantService) {
+    this.tenantService = tenantService;
+  }
 
   @Get
   public HttpResponse<?> getTenant() {
@@ -26,6 +31,7 @@ public class OkapiTenantController {
   public HttpResponse<?> createTenant() {
     Map result = new HashMap();
     LOG.debug("OkapiTenantController::createTenant");
+    tenantService.createTenant("test");
     return HttpResponse.ok(result);
   }
 
@@ -33,6 +39,7 @@ public class OkapiTenantController {
   public HttpResponse<?> destroyTenant() {
     Map result = new HashMap();
     LOG.debug("OkapiTenantController::destroyTenant");
+    tenantService.destroyTenant("test");
     return HttpResponse.ok(result);
   }
 
