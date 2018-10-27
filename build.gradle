@@ -55,6 +55,7 @@ publishing {
   publications {
     plugin(MavenPublication) {
       groupId "${group}"
+      artifactId = 'micronaut-okapi'
       pom.withXml {
         def pomNode = asNode()
         pomNode.dependencyManagement.replaceNode {}
