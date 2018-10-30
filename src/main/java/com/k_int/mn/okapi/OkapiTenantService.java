@@ -4,6 +4,7 @@ import javax.inject.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.grails.orm.hibernate.HibernateDatastore;
+import javax.inject.*;
 
 @Singleton
 class OkapiTenantService {
@@ -12,6 +13,7 @@ class OkapiTenantService {
 
   HibernateDatastore hibernateDatastore;
 
+  @Inject
   public OkapiTenantService(HibernateDatastore hibernateDatastore) {
     this.hibernateDatastore = hibernateDatastore;
   }
