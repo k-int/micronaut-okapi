@@ -12,6 +12,9 @@ class OkapiTenantService {
 
   HibernateDatastore hibernateDatastore;
 
+  public OkapiTenantService(HibernateDatastore hibernateDatastore) {
+    this.hibernateDatastore = hibernateDatastore;
+  }
 
   public void createTenant(String tenantId) {
     LOG.debug("OkapiTenantService::createTenant");
