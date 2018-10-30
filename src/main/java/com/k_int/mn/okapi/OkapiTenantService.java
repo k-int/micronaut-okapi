@@ -20,7 +20,12 @@ class OkapiTenantService {
 
     try {
       LOG.debug("See if we already have a datastore for "+new_schema_name);
-      hibernateDatastore.getDatastoreForConnection(new_schema_name);
+      if ( hibernateDatastore != null ) {
+        hibernateDatastore.getDatastoreForConnection(new_schema_name);
+      }
+      else {
+        LOG.error("Unable to obtain hibernateDatastore");
+      }
       // log.debug("Module already registered for tenant");
     }
     catch ( org.grails.datastore.mapping.core.exceptions.ConfigurationException ce ) {
