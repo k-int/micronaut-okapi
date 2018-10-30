@@ -9,6 +9,13 @@ apply plugin:"java"
 version "0.1.1"
 group "com.k_int.mn.okapi"
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://jcenter.bintray.com" }
+    maven { url "http://maven.k-int.com/content/repositories/releases" }
+}
+
 dependencyManagement {
     imports {
         mavenBom 'io.micronaut:micronaut-bom:1.0.0'
@@ -19,13 +26,6 @@ ext {
     gormVersion = '6.1.9.RELEASE'
     un = project.hasProperty('kintMavenUser') ? project.kintMavenUser : null
     pw = project.hasProperty('kintMavenPassword') ? project.kintMavenPassword : null
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
-    maven { url "http://maven.k-int.com/content/repositories/releases" }
 }
 
 dependencies {
