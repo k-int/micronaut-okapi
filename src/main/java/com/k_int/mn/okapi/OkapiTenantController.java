@@ -28,18 +28,18 @@ public class OkapiTenantController {
   }
 
   @Post 
-  public HttpResponse<?> createTenant() {
+  public HttpResponse<?> createTenant(@Header("X-Okapi-Tenant") String okapi_tenant) {
     Map result = new HashMap();
     LOG.debug("OkapiTenantController::createTenant");
-    tenantService.createTenant("test");
+    tenantService.createTenant(okapi_tenant);
     return HttpResponse.ok(result);
   }
 
   @Delete 
-  public HttpResponse<?> destroyTenant() {
+  public HttpResponse<?> destroyTenant(@Header("X-Okapi-Tenant") String okapi_tenant) {
     Map result = new HashMap();
     LOG.debug("OkapiTenantController::destroyTenant");
-    tenantService.destroyTenant("test");
+    tenantService.destroyTenant(okapi_tenant);
     return HttpResponse.ok(result);
   }
 
