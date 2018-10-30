@@ -11,12 +11,8 @@ class OkapiTenantService {
 
   private static final Logger LOG = LoggerFactory.getLogger(OkapiTenantService.class);
 
-  HibernateDatastore hibernateDatastore;
-
   @Inject
-  public OkapiTenantService(HibernateDatastore hibernateDatastore) {
-    this.hibernateDatastore = hibernateDatastore;
-  }
+  HibernateDatastore hibernateDatastore;
 
   public void createTenant(String tenantId) {
     LOG.debug("OkapiTenantService::createTenant");
